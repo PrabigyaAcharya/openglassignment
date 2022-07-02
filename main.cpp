@@ -60,37 +60,49 @@ float vertices[] = {
 	0.000000, 0.000000, -1.000000,	0.5f, 0.2f, 0.5f,	-0.8402, 0.2425, -0.4851,
 };
 
-GLuint indices[] = {
-	0, 1, 2,
-	0, 2, 5,
-	1, 2, 5, 
-	0, 1, 5
-};
 
 float lightcord[] = {
-	0.7f, 0.7f, 0.0f,
-	0.7f, 0.7f, -0.2f,
-	0.7f,  0.9f, 0.0f,
-	0.7f,  0.9f, -0.2f,
-	0.5f, 0.7f, 0.0f,
-	0.5f, 0.9f, 0.0f,
-	0.5f, 0.9f, -0.2f,
-	0.5f, 0.7f, -0.2f
-};
+-0.05f, -0.05f, -0.05f,  0.0f,  0.0f, -1.0f,
+		0.05f, -0.05f, -0.05f,  0.0f,  0.0f, -1.0f,
+		0.05f,  0.05f, -0.05f,  0.0f,  0.0f, -1.0f,
+		0.05f,  0.05f, -0.05f,  0.0f,  0.0f, -1.0f,
+		-0.05f,  0.05f, -0.05f,  0.0f,  0.0f, -1.0f,
+		-0.05f, -0.05f, -0.05f,  0.0f,  0.0f, -1.0f,
 
-GLuint lightindices[] = {
-	0, 1, 2,
-	1, 2, 3,
-	0, 2, 5,
-	0, 4, 5,
-	2, 5, 6,
-	2, 3, 6,
-	4, 5, 7,
-	7, 5, 6,
-	7, 6, 3,
-	7, 1, 3,
-	0, 4, 7,
-	0, 7, 1
+		-0.05f, -0.05f,  0.05f,  0.0f,  0.0f, 1.0f,
+		0.05f, -0.05f,  0.05f,  0.0f,  0.0f, 1.0f,
+		0.05f,  0.05f,  0.05f,  0.0f,  0.0f, 1.0f,
+		0.05f,  0.05f,  0.05f,  0.0f,  0.0f, 1.0f,
+		-0.05f,  0.05f,  0.05f,  0.0f,  0.0f, 1.0f,
+		-0.05f, -0.05f,  0.05f,  0.0f,  0.0f, 1.0f,
+
+		-0.05f,  0.05f,  0.05f, -1.0f,  0.0f,  0.0f,
+		-0.05f,  0.05f, -0.05f, -1.0f,  0.0f,  0.0f,
+		-0.05f, -0.05f, -0.05f, -1.0f,  0.0f,  0.0f,
+		-0.05f, -0.05f, -0.05f, -1.0f,  0.0f,  0.0f,
+		-0.05f, -0.05f,  0.05f, -1.0f,  0.0f,  0.0f,
+		-0.05f,  0.05f,  0.05f, -1.0f,  0.0f,  0.0f,
+
+		0.05f,  0.05f,  0.05f,  1.0f,  0.0f,  0.0f,
+		0.05f,  0.05f, -0.05f,  1.0f,  0.0f,  0.0f,
+		0.05f, -0.05f, -0.05f,  1.0f,  0.0f,  0.0f,
+		0.05f, -0.05f, -0.05f,  1.0f,  0.0f,  0.0f,
+		0.05f, -0.05f,  0.05f,  1.0f,  0.0f,  0.0f,
+		0.05f,  0.05f,  0.05f,  1.0f,  0.0f,  0.0f,
+
+		-0.05f, -0.05f, -0.05f,  0.0f, -1.0f,  0.0f,
+		0.05f, -0.05f, -0.05f,  0.0f, -1.0f,  0.0f,
+		0.05f, -0.05f,  0.05f,  0.0f, -1.0f,  0.0f,
+		0.05f, -0.05f,  0.05f,  0.0f, -1.0f,  0.0f,
+		-0.05f, -0.05f,  0.05f,  0.0f, -1.0f,  0.0f,
+		-0.05f, -0.05f, -0.05f,  0.0f, -1.0f,  0.0f,
+
+		-0.05f,  0.05f, -0.05f,  0.0f,  1.0f,  0.0f,
+		0.05f,  0.05f, -0.05f,  0.0f,  1.0f,  0.0f,
+		0.05f,  0.05f,  0.05f,  0.0f,  1.0f,  0.0f,
+		0.05f,  0.05f,  0.05f,  0.0f,  1.0f,  0.0f,
+		-0.05f,  0.05f,  0.05f,  0.0f,  1.0f,  0.0f,
+		-0.05f,  0.05f, -0.05f,  0.0f,  1.0f,  0.0f
 };
 
 int main() {
@@ -125,7 +137,6 @@ int main() {
 	VAO VAO1;
 	VAO1.Bind();
 	VBO VBO1(vertices, sizeof(vertices));
-	EBO EBO1(indices, sizeof(indices));
 	VAO1.LinkAttribute(VBO1, 0, 3, GL_FLOAT, 9 * sizeof(float), (void*)0);
 	VAO1.LinkAttribute(VBO1, 1, 3, GL_FLOAT, 9 * sizeof(float), (void*)(3 * sizeof(float)));
 	VAO1.LinkAttribute(VBO1, 2, 3, GL_FLOAT, 9 * sizeof(float), (void*)(6 * sizeof(float)));
@@ -135,22 +146,19 @@ int main() {
 	VAO lVAO;
 	lVAO.Bind();
 	VBO lVBO(lightcord, sizeof(lightcord));
-	EBO lEBO(lightindices, sizeof(lightindices));
-	lVAO.LinkAttribute(lVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+	lVAO.LinkAttribute(lVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
 
-	//glm::vec4 lightcolor = glm::vec4(0.0f, 1.0f, 1.0f, 1.0f);
-	//glUniform4f(glGetUniformLocation(lightshader.ID, "lightcolor"), lightcolor.x, lightcolor.y, lightcolor.z, lightcolor.w);
-	//glUniform4f(glGetUniformLocation(shaderprogram.ID, "lightcolor"), lightcolor.x, lightcolor.y, lightcolor.z, lightcolor.w);
+	glm::vec4 lightcolor = glm::vec4(0.0f, 1.0f, 1.0f, 1.0f);
+	glUniform4f(glGetUniformLocation(lightshader.ID, "lightcolor"), lightcolor.x, lightcolor.y, lightcolor.z, lightcolor.w);
+	glUniform4f(glGetUniformLocation(shaderprogram.ID, "lightcolor"), lightcolor.x, lightcolor.y, lightcolor.z, lightcolor.w);
 
 	//unbinding to prevent modification
 	VAO1.Unbind();
 	VBO1.Unbind();
-	EBO1.Unbind();
 
 
 	lVAO.Unbind();
 	lVBO.Unbind();
-	lEBO.Unbind();
 
 	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
@@ -295,13 +303,14 @@ int main() {
 		//bind tha vao
 		VAO1.Bind();
 		//draw the triangle using the GL_TRIANGLES primitive
-		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, 0);
-
+		//glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 12);
 
 		lightshader.Activate();
 		camera.Matrix(lightshader, "cam");
 		lVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(lightindices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		//glDrawElements(GL_TRIANGLES, sizeof(lightindices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -309,12 +318,10 @@ int main() {
 
 	VAO1.Delete();
 	VBO1.Delete();
-	EBO1.Delete();
 	shaderprogram.Delete();
 
 	lVAO.Delete();
 	lVBO.Delete();
-	lEBO.Delete();
 	lightshader.Delete();
 
 	glfwDestroyWindow(window);
