@@ -11,20 +11,23 @@ uniform vec3 camPos;
 
 void main()
 {
-	float ambient = 0.20f;
 
-	// diffuse lighting
-	vec3 normal = normalize(Normal);
-	vec3 lightDirection = normalize(lightPos - crntPos);
-	float diffuse = max(dot(normal, lightDirection), 0.0f);
-
-	// specular lighting
-	float specularLight = 0.50f;
-	vec3 viewDirection = normalize(camPos - crntPos);
-	vec3 reflectionDirection = reflect(-lightDirection, normal);
-	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 8);
-	float specular = specAmount * specularLight;
-
-	// outputs final color
-	FragColor = lightColor * (diffuse + ambient + specular);
+    float ambientStrength = 0.1;
+    vec3 ambient = ambientStrength * lightColor.xyz;
+  	
+    // diffuse 
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(lightPos - currentPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * lightColor.xyz;
+    
+    // specular
+    float specularStrength = 0.5;
+    vec3 viewDir = normalize(camPos - currentPos);
+    vec3 reflectDir = reflect(-lightDir, norm);  
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    vec3 specular = specularStrength * spec * lightColor.xyz;  
+        
+    vec3 result = (ambient + diffuse + specular) * color;
+    FragColor = vec4(result, 1.0);
 }
